@@ -38,6 +38,12 @@
 
 
 
+----
+
+----
+
+
+
 ## Nov 16, 2021
 
 ### Today, I learned about git.
@@ -55,6 +61,14 @@
 *I learned how to connect to git-hub with ssh key.*
 
 > Hence, different git operations were learned and got familiar on writing TIL.
+
+---
+
+---
+
+## Nov 18, 2021
+
+### Today, I learned about pull request in GitHub.
 
 
 
