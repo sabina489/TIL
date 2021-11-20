@@ -118,6 +118,12 @@
 
 *Pull requests let us tell others about changes we have pushed to a branch in a repository on GitHub* .
 
+---
+
+## Nov 19, 2021
+
+### Today, I learned about variables, numbers, strings in Python.
+
 
 
 
