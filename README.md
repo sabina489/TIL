@@ -124,6 +124,44 @@
 
 ### Today, I learned about variables, numbers, strings in Python.
 
+---
+
+## Nov 21, 2021
+
+### Today, I learned about methods, lists, tuples, modules,prompting and passing, reading and writing the files in python.
+
+---
+
+## Nov 22, 2021
+
+### Today, I learned about functions and variables, how function can return something.
+
+### I learned about Strings, Bytes, and Character Encodings . 
+
+*The text file simply contains a list of human language names that are encoded in UTF-8.*
+
+---
+
+## Nov 23, 2021
+
+### Today, I learned about IF-STATEMENT, ELSE-IF STATEMENT, Loops and Lists, While Loops in Python.
+
+---
+
+## Nov 24, 2021
+
+### Today, I learned about List and Dictionary in Python.
+
+ 
+
+
+
+
+
+
+
+
+
 
 
 
