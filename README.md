@@ -116,13 +116,34 @@
 
 ### Today, I learned about pull request in GitHub.
 
-*Pull requests let us tell others about changes we have pushed to a branch in a repository on GitHub* .
+*Pull requests let us tell others about changes we have pushed to a branch in a repository on Git-Hub* .
 
 ---
 
 ## Nov 19, 2021
 
-### Today, I learned about variables, numbers, strings in Python.
+### *Today, I learned about variables, numbers, strings in Python.*
+
+**1. Variables**
+
+*To create a variable in Python, all we need to do is specify the variable name, and then assign a value to it.*
+
+```
+<variable name> = <value>
+```
+
+* A variable name must start with a letter or the underscore character.
+* A variable name cannot start with a number.
+* A variable name only contain alpha-numeric characters and underscores.
+* Variable names are case-sensitive.
+
+
+
+
+
+
+
+
 
 ---
 
@@ -151,6 +172,32 @@
 ## Nov 24, 2021
 
 ### Today, I learned about List and Dictionary in Python.
+
+---
+
+# Nov 25, 2021
+
+*Today, I learned about Modules, Classes and Objects in Python.*
+
+---
+
+# Nov 26, 2021
+
+*Today, I learned about Inheritance in Python.*
+
+* *Python Inheritance* : Inheritance allows us to define a class that inherits all the methods and properties from another class.
+
+* Parent class is the class being inherited from, also called base class.
+
+* Child class is the class that inherits from another class, also called derived class.
+
+  *We use a Is-A when we talk about objects and classes being related to each other by a class relationship.*
+
+  *We use a Has-A when we talk about objects and classes that are related only because they reference each other.*
+
+  
+
+  
 
  
 
