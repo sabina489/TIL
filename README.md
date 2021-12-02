@@ -114,7 +114,7 @@
 
 ## Nov 18, 2021
 
-### Today, I learned about pull request in GitHub.
+### Today, I learned about pull request in Git-Hub.
 
 *Pull requests let us tell others about changes we have pushed to a branch in a repository on Git-Hub* .
 
@@ -133,19 +133,16 @@
 ```
 
 * A variable name must start with a letter or the underscore character.
+
 * A variable name cannot start with a number.
+
 * A variable name only contain alpha-numeric characters and underscores.
+
 * Variable names are case-sensitive.
 
+  ---
 
-
-
-
-
-
-
-
----
+  
 
 ## Nov 21, 2021
 
@@ -156,6 +153,42 @@
 ## Nov 22, 2021
 
 ### Today, I learned about functions and variables, how function can return something.
+
+* *Functions : A function is a block of code which only runs when it is called .*
+
+  1. Default values for arguments
+
+  ```
+  def function_name(var="value"):
+  ```
+
+  2. Using Multiple arguments
+
+     ```
+     def function_name(*args):
+     ```
+
+  3. Unpacking arguments
+
+     ```
+     def function_name(int, string, string):
+     list=[1, "name1", "name2"]
+     function_name=(*list)
+     ```
+
+  4. Sets(a={}), dictionaries(a={'key':'value'})
+
+     ```
+     to show dictionary content
+     for k, v in dic.items()
+     print(k+", "+v)
+     ```
+
+  ---
+
+  ---
+
+  
 
 ### I learned about Strings, Bytes, and Character Encodings . 
 
@@ -194,6 +227,57 @@
   *We use a Is-A when we talk about objects and classes being related to each other by a class relationship.*
 
   *We use a Has-A when we talk about objects and classes that are related only because they reference each other.*
+
+  ---
+
+  # Nov 28, 2021
+
+  *Today, I learned how to make a game in Python.*
+
+  ---
+
+  ---
+
+  # Dec 2, 2021
+
+  *Today, I learned about computation, uses of computation, how to solve a problem.*
+
+  - Computer science is the study of computation and information.
+  - It investigates the computational algorithms that can be applied to acquire, represent, generate, transform, and communicate knowledge that solves computational problems.
+  - There are many types of informations. A number, string, text, image, video are the kinds of information.
+  - An algorithm is the sequence of steps used to perform a computation.
+  - Communication, information storage and retrieval, device monitoring and control, information encryption and decryption, and simulation are the uses of computation.
+  - There are two kinds of translators : compilers and interpreters. 
+  - An interpreter translates one statement of a program into machine language by interpreting that line.
+
+  **Problem-based learning**
+
+  - First we need to introduce a problem.
+  - Then, identify the knowledge/skills required.
+  - After that we need to learn knowledge or skill as it is needed.
+
+  *Advantages of problem-based learning*
+
+  1. The learner may be more motivated to learn the techniques and tools.
+  2. The learner learns problem solving in addition to the techniques and tools.
+  3. There may be higher transfer of learning to other problem domains.
+
+  *Disadvantage of problem-based learning*
+
+  1. Some learners may be uncomfortable trying to solve a problem before they know the necessary knowledge.
+  2. It may take extra time to learn.
+
+  ---
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 
