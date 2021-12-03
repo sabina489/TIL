@@ -269,18 +269,26 @@
 
   ---
 
-  
+  # Dec 3, 2021
+
+  *Today, I learned how we can use computational problem solving techniques to create games, how to install virtual machine and played hacking game.*
 
   
 
   
 
-  
+  - 
 
   
 
   
-
+  
+  
+  
+  
+  
+  
+  
   
 
  
