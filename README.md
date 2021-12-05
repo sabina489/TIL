@@ -273,22 +273,55 @@
 
   *Today, I learned how we can use computational problem solving techniques to create games, how to install virtual machine and played hacking game.*
 
+  ---
+
+  # Dec 5, 2021
+
+  *Today, I leaned about creating version*, observed and played  the first version of Hacking. Described and test plan was created for Hacking Version 1.
+
+  
+
+  **Feature selection**
+
+  Feature selection determines the feature set that each version must implement. One of the criteria for future selection is balanced feature sets.
+
+  Second criteria for feature selection is Feature Dependency.
+
+  **Game Version**
+
+  - We break a big problem into several smaller problems called versions that are easier to solve.
+  - It is useful to split a single feature into multiple features to help balance the feature sets. For example, using a Window involves both opening a Window and closing a Window.
+
+  **First version of Hacking**
+
+  - A message is printed below my guess, it indicates that my guess is incorrect even though I entered the correct answer.
+  - Press enter to end the game.
+
+  **Description of Hacking Version 1**
+
+  - A description of a game is an explanation of what happens as the game is played.
+  - The description includes aspects, such as what the game looks like, how it changes, and how it responds to player actions.
+  - A description describes the features that must be included in the game, and how these features interact.
+
+  **Test plan**
+
+  - A test plan is a group of tests that are performed on a program to make sure that it performs as expected. 
+  - Here, test plans only contain functional tests. Each functional test consists of and action and a group of questions.
+  - A tester manually performs the action and uses the group of questions to evaluate whether the game responds to that action as described in the game description.
+  - Each test is phrases as a yes or no question. All the answers must be yes for the program to be completely correct.
+
+  ---
+
+  
+
   
 
   
 
-  - 
-
   
 
   
-  
-  
-  
-  
-  
-  
-  
+
   
 
  
