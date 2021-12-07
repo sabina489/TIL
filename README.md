@@ -312,13 +312,43 @@
 
   ---
 
-  
+  # Dec 6,2021
 
-  
+  *I learned about algorithm.*
 
-  
+  - An algorithm is a sequence of steps that solves a problem.
+  - An algorithm is more precise than a test plan because its steps define the logic of the solution. 
+  - Although an algorithm is more precise than a test plan, it is less precise than code.
 
-  
+  ---
+
+  # Dec 7,2021
+
+  *Today, I learned how to start the Wing IDE and configure it for the Python Shell.*
+
+  *Learned about Python expressions and Python Interpretation*
+
+  **Python Expressions**
+
+  1. Literal Strings: It can be enclosed in single or double quotes. example. 'hello', 'Python',etc.
+  2. Function call: Function is like a machine that has inputs and outputs. Example: len('hello') here, len function is a built-in function, where len is short for length. The literal string was used as the function argument.
+
+  **Token in Python**
+
+  - A token is constructed from one or more characters where each character can be a letter, a digit, a symbol, a special character, or whitespace. Whitespace is a space, a tab, or a page break character also called a form feed.
+  - Python has five different kinds of tokens.
+
+  1. **Delimiter** : In programming languages, delimiters are analogous to punctuation in natural language. For example, left paren and right paren are delimiter tokens in Python.
+
+  2. **Literal** : Literals in programming languages are analogous to different parts of speech such as noun, verb and pronoun.
+
+  3. **Identifier **: Identifiers in programming languages are analogous to a pronoun.
+
+  4. **Operator**
+
+  5. **Keyword**
+
+     
 
   
 
