@@ -279,8 +279,6 @@
 
   *Today, I leaned about creating version*, observed and played  the first version of Hacking. Described and test plan was created for Hacking Version 1.
 
-  
-
   **Feature selection**
 
   Feature selection determines the feature set that each version must implement. One of the criteria for future selection is balanced feature sets.
@@ -291,25 +289,25 @@
 
   - We break a big problem into several smaller problems called versions that are easier to solve.
   - It is useful to split a single feature into multiple features to help balance the feature sets. For example, using a Window involves both opening a Window and closing a Window.
-
+  
   **First version of Hacking**
 
   - A message is printed below my guess, it indicates that my guess is incorrect even though I entered the correct answer.
   - Press enter to end the game.
-
+  
   **Description of Hacking Version 1**
 
   - A description of a game is an explanation of what happens as the game is played.
   - The description includes aspects, such as what the game looks like, how it changes, and how it responds to player actions.
   - A description describes the features that must be included in the game, and how these features interact.
-
+  
   **Test plan**
 
   - A test plan is a group of tests that are performed on a program to make sure that it performs as expected. 
   - Here, test plans only contain functional tests. Each functional test consists of and action and a group of questions.
   - A tester manually performs the action and uses the group of questions to evaluate whether the game responds to that action as described in the game description.
   - Each test is phrases as a yes or no question. All the answers must be yes for the program to be completely correct.
-
+  
   ---
 
   # Dec 6,2021
@@ -319,7 +317,7 @@
   - An algorithm is a sequence of steps that solves a problem.
   - An algorithm is more precise than a test plan because its steps define the logic of the solution. 
   - Although an algorithm is more precise than a test plan, it is less precise than code.
-
+  
   ---
 
   # Dec 7,2021
@@ -332,29 +330,104 @@
 
   1. Literal Strings: It can be enclosed in single or double quotes. example. 'hello', 'Python',etc.
   2. Function call: Function is like a machine that has inputs and outputs. Example: len('hello') here, len function is a built-in function, where len is short for length. The literal string was used as the function argument.
-
+  
   **Token in Python**
 
   - A token is constructed from one or more characters where each character can be a letter, a digit, a symbol, a special character, or whitespace. Whitespace is a space, a tab, or a page break character also called a form feed.
   - Python has five different kinds of tokens.
-
+  
   1. **Delimiter** : In programming languages, delimiters are analogous to punctuation in natural language. For example, left paren and right paren are delimiter tokens in Python.
-
   2. **Literal** : Literals in programming languages are analogous to different parts of speech such as noun, verb and pronoun.
-
   3. **Identifier **: Identifiers in programming languages are analogous to a pronoun.
-
   4. **Operator**
-
   5. **Keyword**
 
-     
+  ---
 
+  # Dec 8, 2021
+
+  *Learned about Lexical Rules, Tables and Sample Problem (identifier, literal and delimiter.*
+
+  **Current Lexical Rules:**
+
+  **identifier**
   
-
+  - start with a letter or underscore, and is followed by zero or more letters, underscores or digits.
   
+  **literal string**
+  
+  - starts with a quote, followed by zero or more non-quote characters and ends with a quote.
+  
+  **literal integer**
+  
+  - one ore more digits.
+  
+  **literal float**
+  
+  - one dot, one or more digits and no other characters.
+  
+  **longest token rule**
+  
+  - when creating a token, create the longest token possible.
+  
+  **whitespace rule**
+  
+  for whitespace not at the start of a line:
+  
+  - if whitespace is inside a literal string it is part of the literal string.
+  - otherwise, its ends the current token and no token is created for it.
+  
+  
+  
+  **Current Lexical tables:**
+  
+  **delimiter**
+  
+  | (    | )    | [    | ]    | {    |
+  | ---- | ---- | ---- | ---- | :--- |
+  | }    | ,    | :    | .    | ;    |
+  | @    | =    | ->   | +=   | -=   |
+  | *=   | /=   | //=  | %=   | &=   |
+  | \|=  | ^=   | >>=  | <<=  | **=  |
 
- 
+ **For example**
+
+```
+len('hello')
+```
+
+- 1st taken and token kind is **len identifier**
+- 2nd token and token kind is **( delimiter**
+- 3rd token and token kind is **'hello' literal string**
+- 4th token and token kind is **) delimiter**
+
+**Python interpretation process**
+
+1. lexical analysis: combine characters into tokens.
+2. syntax analysis: combine tokens into statements.
+3. semantic analysis: evaluate the statement.
+
+**Python Objects**
+
+- The Python interpreter creates objects to represent data in computer memory.
+- Each object has an identity, a type, and a value.
+- An object's identity is determined when the object is created.
+- Once the object is created, it is unique and immutable, which means it cannot be changed.
+- An object's type determines its format or shape in memory and how it is interpreted during computations.
+
+**Python Semantics of Literals, Identifiers and Function Calls**
+
+- Semantic Rule for Literal: create a new object for the literal.
+- Semantic Rule for Identifier: if the identifier is in the namespace, dereference it to get the result object, otherwise report an error.
+- Semantic Rule for function call: evaluate the identifier to obtain a function object. If there is an expression, evaluate it to obtain an argument object. If there is an argument object, pass it into the function. evaluate the function code to obtain a result object.
+
+---
+
+
+
+
+
+
 
 
 
