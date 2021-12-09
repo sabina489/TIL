@@ -423,6 +423,19 @@ len('hello')
 
 ---
 
+# Dec 9,2021
+
+*I learned about Python Program Interpretation*
+
+**-** The python interpreter uses lexical analysis to create tokens for the entire program. It then checks the syntax of each statement in order from the first statement to the last statement. Finally, it uses semantic analysis to evaluate each statement in order.
+
+**print function**
+
+- print function displays a human-readable form of its argument object to selectively display two of the three objects in the program.
+- The print function returns a unique object whose type is NoneType.
+
+---
+
 
 
 
