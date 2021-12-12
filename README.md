@@ -436,6 +436,10 @@ len('hello')
 
 ---
 
+# Dec 12, 2021
+
+*Today, I observed and played Hacking Version 2 game and used the description builder to create a description for hacking version 2.*
+
 
 
 
