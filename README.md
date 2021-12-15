@@ -440,6 +440,18 @@ len('hello')
 
 *Today, I observed and played Hacking Version 2 game and used the description builder to create a description for hacking version 2.*
 
+---
+
+# Dec 15, 2021
+
+*Today, functional test plan was created for Hacking Version 2 and learned about Python Assignment Statement.*
+
+**Python Assignment Statement**
+
+- An assignment statement is used to evaluate an expression and bind an identifier to the result object.
+
+---
+
 
 
 
