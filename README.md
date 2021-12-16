@@ -444,11 +444,45 @@ len('hello')
 
 # Dec 15, 2021
 
-*Today, functional test plan was created for Hacking Version 2 and learned about Python Assignment Statement.*
+*Functional test plan was created for Hacking Version 2 and learned about Python Assignment Statement.*
 
 **Python Assignment Statement**
 
 - An assignment statement is used to evaluate an expression and bind an identifier to the result object.
+
+---
+
+# Dec 16, 2021
+
+*Algorithm was created for Hacking Version 2 and learned about Python Binary Expression and Operator Token*.
+
+**Semantic Rules for binary expression**
+
+- assignment statement -as
+
+1. plus evaluate the expression to obtain a result object.
+2. if the identifier is not in the namespace, add it to the namespace.
+3. bind the identifier to this result object.
+
+- new binary expression -be
+
+1. +evaluate  the left expression to get the first operand object.
+2. +evaluate the right expression to get the second operand object.
+3. identify the operator function based on the binary operator and the *type* of the two operands.
+4. apply the binary operator's function.
+
+- function call -fc
+
+1. +evaluate the identifier to obtain a function object.
+2. ^ if there is an expression, evaluate it to obtain an argument object.
+3. if there is an argument object, pass it to the function.
+4. evaluate the function code to obtain a result object.
+
+- identifier -id
+  - if the identifier is in the namespace, dereference it to get the result object, otherwise report an error.
+- literal -li
+
+create a new object for the literal.
 
 ---
 
