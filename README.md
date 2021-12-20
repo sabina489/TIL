@@ -486,7 +486,39 @@ create a new object for the literal.
 
 ---
 
+# Dec 17,2021
 
+*Python Import statement and Keyword Token and Python Multi-argument Function Call was learned*
+
+- An import statement allows us to use functions, types and other objects from a library module.
+- A module is a Python program with it's own statements and namespace.
+- An import statement imports identifiers from a module into our programs namespace so that we can use the objects the identifiers are bound to.
+
+**Multi-argument Function Call**
+
+- Different functions support different numbers of arguments.
+- Many Python functions can accept a variable number of arguments. For example, when the print function is called with no argument, it displays a blank line. When the print function is called with more than one argument, it evaluates its argument expressions and displays all the results objects on one line separated by single blanks.
+
+---
+
+# Dec 19, 2021
+
+*Today, I learned Python Method Call and Attribute Reference and program for Hacking Version 2 was implemented.*
+
+---
+
+# Dec 20,2021
+
+*Today, I observed, played and Described Hacking Version 3.* *Test Plan Algorithm was created for Hacking Version 3.*
+
+*Learned about if Statement and Boolean Type.*
+
+- if statement is a statement that has another statement inside of it.
+- A statement that includes another statement is called a compound statement.
+- A statement that does not include another statement, is called a simple statement.
+- The if statement is a compound statement and the expression, assignment and import statements are simple statements.
+
+---
 
 
 
