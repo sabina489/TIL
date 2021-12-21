@@ -520,6 +520,12 @@ create a new object for the literal.
 
 ---
 
+# Dec 21, 2021
+
+*Today, I learned elif and else clauses, Keyword Operator, Short Circuit Evaluation, Unary Expression, and Operator Precedence in Python.*
+
+---
+
 
 
 
