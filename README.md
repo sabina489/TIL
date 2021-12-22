@@ -526,6 +526,18 @@ create a new object for the literal.
 
 ---
 
+# Dec 22, 2021
+
+*Today, I learned Python Sequences and Subscription, Python Tuple and List Types.*
+
+- A sequence is a finite ordered group of elements where each object has a numerical index between o and 1 less than the number of elements in the sequence.
+- There is no sequence type in Python. Instead, sequences are category that include several different Python types.
+- Python subscription is analogous to using subscripts in mathematics. For example, I can reference the string element of hello at index one, using this expression which is pronounced hello of one.
+- A tuple is a sequence whose elements can be any type.
+- A list is like a tuple, in that, its elements can be any type.
+
+---
+
 
 
 
