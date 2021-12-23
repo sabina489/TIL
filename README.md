@@ -538,6 +538,18 @@ create a new object for the literal.
 
 ---
 
+# Dec 23, 2021
+
+*Today, I learned Python Sequences Element Replacement and Python for statement.*
+
+- A for statement,often called a for loop, is used to repeat other statements a definite number of times.
+- There are many situations in which we would like to apply the same computation to each element individually. So, we can use a for statement to evaluate a group of statements as many times as necessary without rewriting those statements.
+- A for statement is another kind of compound statement.
+
+---
+
+
+
 
 
 
