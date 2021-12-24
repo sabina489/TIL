@@ -540,11 +540,22 @@ create a new object for the literal.
 
 # Dec 23, 2021
 
-*Today, I learned Python Sequences Element Replacement and Python for statement.*
+*Today, I learned Python Sequences Element Replacement and Python for statement. Also Program for Hacking-Version 4 is learned.*
 
 - A for statement,often called a for loop, is used to repeat other statements a definite number of times.
 - There are many situations in which we would like to apply the same computation to each element individually. So, we can use a for statement to evaluate a group of statements as many times as necessary without rewriting those statements.
 - A for statement is another kind of compound statement.
+
+---
+
+# Dec 24, 2021
+
+*Today, Hacking Version 5 is observed, played and described. Test Plan and Algorithm was created for Hacking Version 5. Also Python while statement was learned.
+
+- A while statement is a new repetition control structure that uses a Boolean expression to control the repetition instead of using a sequence.
+- A while statement is a compound statement.
+- The header of a while statement consists of the while keyword token, an expression, and a colon delimiter. The header is followed by the suite non-terminal state.
+- A while statement is called an indefinite repetition control structure since we don't know ahead of time how many times it's suite will be evaluated.
 
 ---
 
