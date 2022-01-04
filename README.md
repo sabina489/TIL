@@ -550,12 +550,73 @@ create a new object for the literal.
 
 # Dec 24, 2021
 
-*Today, Hacking Version 5 is observed, played and described. Test Plan and Algorithm was created for Hacking Version 5. Also Python while statement was learned.
+*Today, Hacking Version 5 is observed, played and described. Test Plan and Algorithm was created for Hacking Version 5. Also Python while statement was learned.*
 
 - A while statement is a new repetition control structure that uses a Boolean expression to control the repetition instead of using a sequence.
 - A while statement is a compound statement.
 - The header of a while statement consists of the while keyword token, an expression, and a colon delimiter. The header is followed by the suite non-terminal state.
 - A while statement is called an indefinite repetition control structure since we don't know ahead of time how many times it's suite will be evaluated.
+
+---
+
+# Dec 26, 2021
+
+*Today, I learned about Python functions.*
+
+- Functions allow us to create blocks of code that can be easily executed many times, without needing to constantly rewrite the entire block of code.
+- Creating clean repeatable code is a key part of becoming an effective programmer.
+-  A complete python program consists of blocks and there are three kinds of Python blocks: modules, functions and classes.
+
+---
+
+# Dec 27, 2021
+
+*Today, I learned Python Return Statement, Python Side Effects and learned and observed program for Hacking Version 6.*
+
+- The return statement consists of the keyword token return, followed by an optional expression.
+- Unlike other simple statements, a return statement can only be used in a function definition suite.
+
+---
+
+# Dec 28,2021
+
+*Today, I learned about side effects in Python and solved the quiz questions.*
+
+---
+
+# Dec 29, 2021
+
+*Today, program for Hacking Version 6 was learned.*
+
+---
+
+# Dec 30, 2021
+
+*Today, observed, played, described and test plan was created for Hacking Version 7.*
+
+---
+
+# Dec 31, 2021
+
+*Today, Algorithm was created and Program was implemented for Hacking Version 7.*
+
+---
+
+# Jan 2, 2022
+
+*Today, Poke the Dots was introduced. Also observed, played, described and test plan was created for Poke the Dots Version 1.*
+
+---
+
+# Jan 3, 2022
+
+*Today, I learned about import statement variations and pass statement in Python. Also Algorithm was created and program was implemented for Poke the Dots Version 1.*
+
+---
+
+# Jan 4, 2022
+
+*Today, I learned about Class Definition in Python.*
 
 ---
 
