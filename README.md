@@ -620,13 +620,29 @@ create a new object for the literal.
 
 ---
 
+# Jan 11, 2022
 
+*Today, I learned how to create a new environment*
 
+* Create a new environment
 
+> > conda create --name django python=3
 
+* To use, or "activate" the new environment, type the following:
 
+> >conda activate django
 
+* To deactivate Anaconda environment:
 
+> > conda deactivate
+
+* To see a list of all environments, type:
+
+> conda info --envs
+
+* Change the current environment back to the default(base):
+
+> > source activate
 
 
 
