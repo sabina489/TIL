@@ -644,19 +644,86 @@ create a new object for the literal.
 
 > > source activate
 
+---
 
+# Jan 22, 2022
 
+*Today, I learned how to make first Django app.*
 
+- To see the version of Django we type following command.
 
+  > $ python -m django --version
 
+- Creating a project
 
+  We will need to auto-generate some code that establishes a Django project, a collection of settings for an instance of Django, including database configuration, Django-specific options and application-specific settings.
 
+  > django-admin startproject mysite
 
+This will create a mysite directory in our current directory.
 
+startproject was created:
 
+```
+mysite/
+    manage.py
+    mysite/
+        __init__.py
+        settings.py
+        urls.py
+        asgi.py
+        wsgi.py
+```
 
+- The development server
 
+  We can change into the outer mysite directory as site.
 
+> python manage.py runserver
+
+- Creating the Polls app
+
+  > python manage.py startapp polls
+
+This will create a directory polls, which is laid out like this:
+
+```
+polls/
+    __init__.py
+    admin.py
+    apps.py
+    migrations/
+        __init__.py
+    models.py
+    tests.py
+    views.py
+```
+
+---
+
+# Jan 23, 2022
+
+*Today, I learned about SQL and MVC and how it works.*
+
+---
+
+# Jan 24, 2022
+
+*Today, I learned about Models and the admin site in Django.*
+
+---
+
+# Jan 25, 2022
+
+*Today, I learned about Views and templates in Django.*
+
+---
+
+# Jan 26, 2022
+
+*Today, I learned about Forms and generic views in Django.*
+
+---
 
 
 
