@@ -725,7 +725,43 @@ polls/
 
 ---
 
+# Jan 27, 2022
 
+*Today, I learned about testing in Django.*
+
+---
+
+# Jan 28, 2022
+
+*Today, I learned about Static files in Django.*
+
+---
+
+# Jan 31, 2022
+
+*Today, I learned how to Customize the admin site in Django.*
+
+---
+
+# Feb 1,2022
+
+*Today, I learned about basics of HTML and CSS.*
+
+---
+
+# Feb 2, 2022
+
+*Today, I create the admin site for portfolio.*
+
+* Using SSH Key in git hub:
+
+  >git remote set-url origin git@github.com:sabina489/portfolio.git
+
+* And push
+
+>git push origin master
+
+---
 
 
 
