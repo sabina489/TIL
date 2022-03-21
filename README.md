@@ -945,11 +945,349 @@ git rm -r --cached . && git add . && git commit -am "Remove ignored files"
 
 ---
 
+ # March 21, 2022
+
+## DJANGO REST FRAMEWORK
+
+*Django REST framework is a powerful and flexible toolkit for building Web APIs.*
 
 
 
+**Project setup**
+
+*Create the project directory*
+
+> mkdir tutorial
+>
+> cd tutorial
+
+*Create a virtual environment to isolate our package dependencies locally*
+
+> python3 -m venv env
+>
+> source env/bin/activate
+
+*Install Django and Django Rest fromework into the virtual environment*
+
+> pip install django
+>
+> pin install djangorestframework
+>
+> cd tutorail
+>
+> django-admin startapp quickstart
+>
+> cd ..
+
+*The project layout should look like.*
+
+>```
+>$ pwd
+><some path>/tutorial
+>$ find .
+>.
+>./manage.py
+>./tutorial
+>./tutorial/__init__.py
+>./tutorial/quickstart
+>./tutorial/quickstart/__init__.py
+>./tutorial/quickstart/admin.py
+>./tutorial/quickstart/apps.py
+>./tutorial/quickstart/migrations
+>./tutorial/quickstart/migrations/__init__.py
+>./tutorial/quickstart/models.py
+>./tutorial/quickstart/tests.py
+>./tutorial/quickstart/views.py
+>./tutorial/asgi.py
+>./tutorial/settings.py
+>./tutorial/urls.py
+>./tutorial/wsgi.py
+>```
+
+*Now sync our database for the first time:*
+
+> python manage.py migrate
+
+*We'll also create an initial user named admin with a password of password123.*
+
+>python manage.py createsuperuser --email admin@example.com --username admin
+
+**Serializers**
+
+*First we are going to define serializers. create a new module named tutorail/quickstart/serializers.pu*
+
+>```
+>from django.contrib.auth.models import User, Group
+>from rest_framework import serializers
+>
+>
+>class UserSerializer(serializers.HyperlinkedModelSerializer):
+>    class Meta:
+>        model = User
+>        fields = ['url', 'username', 'email', 'groups']
+>
+>
+>class GroupSerializer(serializers.HyperlinkedModelSerializer):
+>    class Meta:
+>        model = Group
+>        fields = ['url', 'name']
+>```
+
+**Views**
+
+*Open tutorail/quickstart/views.py*
+
+>```
+>from django.contrib.auth.models import User, Group
+>from rest_framework import viewsets
+>from rest_framework import permissions
+>from tutorial.quickstart.serializers import UserSerializer, GroupSerializer
+>
+>
+>class UserViewSet(viewsets.ModelViewSet):
+>    """
+>    API endpoint that allows users to be viewed or edited.
+>    """
+>    queryset = User.objects.all().order_by('-date_joined')
+>    serializer_class = UserSerializer
+>    permission_classes = [permissions.IsAuthenticated]
+>
+>
+>class GroupViewSet(viewsets.ModelViewSet):
+>    """
+>    API endpoint that allows groups to be viewed or edited.
+>    """
+>    queryset = Group.objects.all()
+>    serializer_class = GroupSerializer
+>    permission_classes = [permissions.IsAuthenticated]
+>```
+
+*Rather than wirte multiple views we are grouping together all the common behaviour into classes called ViewSets.*
+
+**URLs**
+
+*Now let's wire up the API URLs. on the tutorail/urls.py*
+
+>```
+>from django.urls import include, path
+>from rest_framework import routers
+>from tutorial.quickstart import views
+>
+>router = routers.DefaultRouter()
+>router.register(r'users', views.UserViewSet)
+>router.register(r'groups', views.GroupViewSet)
+>
+># Wire up our API using automatic URL routing.
+># Additionally, we include login URLs for the browsable API.
+>urlpatterns = [
+>    path('', include(router.urls)),
+>    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+>]
+>```
+
+**Pagination**
+
+*Pagination allows us to control how many objects per page are returned.*
+
+*To enable it add the following lines to tutorial/settings.py.*
+
+>```
+>REST_FRAMEWORK = {
+>    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+>    'PAGE_SIZE': 10
+>}
+>```
+
+**Settings**
+
+*add 'rest_framework' to INSTALLED_APPS. The settings module module will be in tutorail/settings.py.*
+
+```
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+]
+```
+
+**Testing our API**
+
+> python manage.py runserver
+
+*Directly through the browser, going to the URL http://127.0.0.1:8000/users/*
+
+---
+
+**1.Serialization**
+
+*Once we creat a new project to work we create an app that we will use to create a imple Web API.*
+
+>python manage.py startapp snippets
+
+Edit the tutorail/settings.py file
+
+>```
+>INSTALLED_APPS = [
+>    ...
+>    'rest_framework',
+>    'snippets',
+>]
+>```
+
+Create a model to work with
+
+Creating a simple Snippet model that is used to store code snippets. 
+
+*snippets/models.py*
+
+```
+from django.db import models
+from pygments.lexers import get_all_lexers
+from pygments.styles import get_all_styles
+
+LEXERS = [item for item in get_all_lexers() if item[1]]
+LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
+STYLE_CHOICES = sorted([(item, item) for item in get_all_styles()])
 
 
+class Snippet(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=100, blank=True, default='')
+    code = models.TextField()
+    linenos = models.BooleanField(default=False)
+    language = models.CharField(choices=LANGUAGE_CHOICES, default='python', max_length=100)
+    style = models.CharField(choices=STYLE_CHOICES, default='friendly', max_length=100)
+
+    class Meta:
+        ordering = ['created']
+```
+
+**We will also need to create an initial migration for our snippet model, and sync the database for the first time**
+
+>python manage.py makemigrations snippets
+>
+>python manage.py migrate snippets
+
+**Creating a Serializer class**
+
+*A serializer class is very similar to a Django Form class, and includes similar validation flags on the various fields such as required, max_length and default.*
+
+*Create a file in the snippets directory named serializers.py and add the following:*
+
+>```
+>from rest_framework import serializers
+>from snippets.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
+>
+>
+>class SnippetSerializer(serializers.Serializer):
+>    id = serializers.IntegerField(read_only=True)
+>    title = serializers.CharField(required=False, allow_blank=True, max_length=100)
+>    code = serializers.CharField(style={'base_template': 'textarea.html'})
+>    linenos = serializers.BooleanField(required=False)
+>    language = serializers.ChoiceField(choices=LANGUAGE_CHOICES, default='python')
+>    style = serializers.ChoiceField(choices=STYLE_CHOICES, default='friendly')
+>
+>    def create(self, validated_data):
+>        """
+>        Create and return a new `Snippet` instance, given the validated data.
+>        """
+>        return Snippet.objects.create(**validated_data)
+>
+>    def update(self, instance, validated_data):
+>        """
+>        Update and return an existing `Snippet` instance, given the validated data.
+>        """
+>        instance.title = validated_data.get('title', instance.title)
+>        instance.code = validated_data.get('code', instance.code)
+>        instance.linenos = validated_data.get('linenos', instance.linenos)
+>        instance.language = validated_data.get('language', instance.language)
+>        instance.style = validated_data.get('style', instance.style)
+>        instance.save()
+>        return instance
+>```
+
+**Writing regular Django views using our Serializer**
+
+Edi the snippets/views.py file, and add the following:
+
+>```
+>from django.http import HttpResponse, JsonResponse
+>from django.views.decorators.csrf import csrf_exempt
+>from rest_framework.parsers import JSONParser
+>from snippets.models import Snippet
+>from snippets.serializers import SnippetSerializer
+>
+>@csrf_exempt
+>def snippet_list(request):
+>    """
+>    List all code snippets, or create a new snippet.
+>    """
+>    if request.method == 'GET':
+>        snippets = Snippet.objects.all()
+>        serializer = SnippetSerializer(snippets, many=True)
+>        return JsonResponse(serializer.data, safe=False)
+>
+>    elif request.method == 'POST':
+>        data = JSONParser().parse(request)
+>        serializer = SnippetSerializer(data=data)
+>        if serializer.is_valid():
+>            serializer.save()
+>            return JsonResponse(serializer.data, status=201)
+>        return JsonResponse(serializer.errors, status=400)
+>@csrf_exempt
+>def snippet_detail(request, pk):
+>    """
+>    Retrieve, update or delete a code snippet.
+>    """
+>    try:
+>        snippet = Snippet.objects.get(pk=pk)
+>    except Snippet.DoesNotExist:
+>        return HttpResponse(status=404)
+>
+>    if request.method == 'GET':
+>        serializer = SnippetSerializer(snippet)
+>        return JsonResponse(serializer.data)
+>
+>    elif request.method == 'PUT':
+>        data = JSONParser().parse(request)
+>        serializer = SnippetSerializer(snippet, data=data)
+>        if serializer.is_valid():
+>            serializer.save()
+>            return JsonResponse(serializer.data)
+>        return JsonResponse(serializer.errors, status=400)
+>
+>    elif request.method == 'DELETE':
+>        snippet.delete()
+>        return HttpResponse(status=204)
+> 
+>```
+
+**Finally, we need to wire these views up. Create the snippets/urls.py file:**
+
+> >```
+> >from django.urls import path
+> >from snippets import views
+> >
+> >urlpatterns = [
+> >    path('snippets/', views.snippet_list),
+> >    path('snippets/<int:pk>/', views.snippet_detail),
+> >]
+> >```
+
+**We also need to wire up the root urlconf, in the tutorial/urls.py file, to include our snippet app's URLs.**
+
+>```
+>from django.urls import path, include
+>
+>urlpatterns = [
+>    path('', include('snippets.urls')),
+>]
+>```
+
+**Testing our first attempt at a Web API**
+
+>python manage.py runserver
+
+---
 
 
 
