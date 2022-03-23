@@ -1392,3 +1392,275 @@ These wrappers provide a few bits of functionality such as making sure we receiv
 
 ---
 
+# March 23,2022
+
+## Class-based Views
+
+*We start by rewriting the root view as a class-based view. All this involves is a little bit of refactoring of views.py.*
+
+>```
+>from snippets.models import Snippet
+>from snippets.serializers import SnippetSerializer
+>from django.http import Http404
+>from rest_framework.views import APIView
+>from rest_framework.response import Response
+>from rest_framework import status
+>
+>
+>class SnippetList(APIView):
+>    """
+>    List all snippets, or create a new snippet.
+>    """
+>    def get(self, request, format=None):
+>        snippets = Snippet.objects.all()
+>        serializer = SnippetSerializer(snippets, many=True)
+>        return Response(serializer.data)
+>
+>    def post(self, request, format=None):
+>        serializer = SnippetSerializer(data=request.data)
+>        if serializer.is_valid():
+>            serializer.save()
+>            return Response(serializer.data, status=status.HTTP_201_CREATED)
+>        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+>    
+>class SnippetDetail(APIView):
+>    """
+>    Retrieve, update or delete a snippet instance.
+>    """
+>    def get_object(self, pk):
+>        try:
+>            return Snippet.objects.get(pk=pk)
+>        except Snippet.DoesNotExist:
+>            raise Http404
+>
+>    def get(self, request, pk, format=None):
+>        snippet = self.get_object(pk)
+>        serializer = SnippetSerializer(snippet)
+>        return Response(serializer.data)
+>
+>    def put(self, request, pk, format=None):
+>        snippet = self.get_object(pk)
+>        serializer = SnippetSerializer(snippet, data=request.data)
+>        if serializer.is_valid():
+>            serializer.save()
+>            return Response(serializer.data)
+>        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+>
+>    def delete(self, request, pk, format=None):
+>        snippet = self.get_object(pk)
+>        snippet.delete()
+>        return Response(status=status.HTTP_204_NO_CONTENT)
+>        
+>        
+>```
+
+*Again, it is pretty similar to the function based view right now.*
+
+**snippets/url.py**
+
+>```
+>from django.urls import path
+>from rest_framework.urlpatterns import format_suffix_patterns
+>from snippets import views
+>
+>urlpatterns = [
+>    path('snippets/', views.SnippetList.as_view()),
+>    path('snippets/<int:pk>/', views.SnippetDetail.as_view()),
+>]
+>
+>urlpatterns = format_suffix_patterns(urlpatterns)
+>```
+
+**Using mixins**
+
+*One of the big wins of using class-based views is that it allows us to easily compose reusable bits of behaviour.*
+
+*The create,retrieve,update,delete operations that we have been using so far are going to be similar for any model-backed API views we create.*
+
+**views.py**
+
+>```
+>from snippets.models import Snippet
+>from snippets.serializers import SnippetSerializer
+>from rest_framework import mixins
+>from rest_framework import generics
+>
+>class SnippetList(mixins.ListModelMixin,
+>                  mixins.CreateModelMixin,
+>                  generics.GenericAPIView):
+>    queryset = Snippet.objects.all()
+>    serializer_class = SnippetSerializer
+>
+>    def get(self, request, *args, **kwargs):
+>        return self.list(request, *args, **kwargs)
+>
+>    def post(self, request, *args, **kwargs):
+>        return self.create(request, *args, **kwargs)
+>class SnippetDetail(mixins.RetrieveModelMixin,
+>                    mixins.UpdateModelMixin,
+>                    mixins.DestroyModelMixin,
+>                    generics.GenericAPIView):
+>    queryset = Snippet.objects.all()
+>    serializer_class = SnippetSerializer
+>
+>    def get(self, request, *args, **kwargs):
+>        return self.retrieve(request, *args, **kwargs)
+>
+>    def put(self, request, *args, **kwargs):
+>        return self.update(request, *args, **kwargs)
+>
+>    def delete(self, request, *args, **kwargs):
+>        return self.destroy(request, *args, **kwargs)
+>       
+>```
+
+**Using generic class-based views**
+
+>```
+>from snippets.models import Snippet
+>from snippets.serializers import SnippetSerializer
+>from rest_framework import generics
+>
+>
+>class SnippetList(generics.ListCreateAPIView):
+>    queryset = Snippet.objects.all()
+>    serializer_class = SnippetSerializer
+>
+>
+>class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
+>    queryset = Snippet.objects.all()
+>    serializer_class = SnippetSerializer
+>```
+
+*This is how we create class-based views and our code looks like good, clean, idiomatic Django.*
+
+---
+
+## Relationships & Hyperlinked APIs
+
+*At the moment, relationships within our API are represented by using primary keys.*
+
+**Creating an endpoint for the root of our API**
+
+**snippets/views.py**
+
+>```
+>from rest_framework.decorators import api_view
+>from rest_framework.response import Response
+>from rest_framework.reverse import reverse
+>
+>
+>@api_view(['GET'])
+>def api_root(request, format=None):
+>    return Response({
+>        'users': reverse('user-list', request=request, format=format),
+>        'snippets': reverse('snippet-list', request=request, format=format)
+>```
+
+**Creating an endpoint for the highlighted snippets**
+
+**snippets/views.py**
+
+>```
+>from rest_framework import renderers
+>
+>class SnippetHighlight(generics.GenericAPIView):
+>    queryset = Snippet.objects.all()
+>    renderer_classes = [renderers.StaticHTMLRenderer]
+>
+>    def get(self, request, *args, **kwargs):
+>        snippet = self.get_object()
+>        return Response(snippet.highlighted)
+>```
+
+*As usual, we need to add the new views that we have created in to our URLconf. We will add a url pattern for our API root in **snippets/urls.py***
+
+>```
+>path('', views.api_root)
+>```
+
+And then add a url pattern for the snippet highlights:
+
+```
+path('snippets/<int:pk>/highlight/', views.SnippetHighlight.as_view()),
+```
+
+**Hyperlinking our API**
+
+Dealing with relationships between entities is one of the more challenging aspects of Web API design. There are a number of different ways that we might choose to represent a relationship:
+
+- Using primary keys.
+- Using hyperlinking between entities.
+- Using a unique identifying slug field on the related entity.
+- Using the default string representation of the related entity.
+- Nesting the related entity inside the parent representation.
+- Some other custom representation.
+
+REST framework supports all of these styles, and can apply them across forward or reverse relationships, or apply them across custom managers such as generic foreign keys.
+
+>```
+>class SnippetSerializer(serializers.HyperlinkedModelSerializer):
+>    owner = serializers.ReadOnlyField(source='owner.username')
+>    highlight = serializers.HyperlinkedIdentityField(view_name='snippet-highlight', format='html')
+>
+>    class Meta:
+>        model = Snippet
+>        fields = ['url', 'id', 'highlight', 'owner',
+>                  'title', 'code', 'linenos', 'language', 'style']
+>
+>
+>class UserSerializer(serializers.HyperlinkedModelSerializer):
+>    snippets = serializers.HyperlinkedRelatedField(many=True, view_name='snippet-detail', read_only=True)
+>
+>    class Meta:
+>        model = User
+>        fields = ['url', 'id', 'username', 'snippets']
+>```
+
+**Making sure our URL patterns are named**
+
+**snippets/urls.py**
+
+>```
+>from django.urls import path
+>from rest_framework.urlpatterns import format_suffix_patterns
+>from snippets import views
+>
+># API endpoints
+>urlpatterns = format_suffix_patterns([
+>    path('', views.api_root),
+>    path('snippets/',
+>        views.SnippetList.as_view(),
+>        name='snippet-list'),
+>    path('snippets/<int:pk>/',
+>        views.SnippetDetail.as_view(),
+>        name='snippet-detail'),
+>    path('snippets/<int:pk>/highlight/',
+>        views.SnippetHighlight.as_view(),
+>        name='snippet-highlight'),
+>    path('users/',
+>        views.UserList.as_view(),
+>        name='user-list'),
+>    path('users/<int:pk>/',
+>        views.UserDetail.as_view(),
+>        name='user-detail')
+>])
+>```
+
+**Adding pagination**
+
+*The list views for users and code snippets could end up returning quite a lot of instances. We can change the default list style to use pagination, by modifying our **tutorial/settings.py***
+
+>```
+>REST_FRAMEWORK = {
+>    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+>    'PAGE_SIZE': 10
+>}
+>```
+
+**Browsing the API**
+
+*If we open a browser and navigate to the browsable API, we will find that we can work our way around the API simply.*
+
+----
+
