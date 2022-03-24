@@ -1664,3 +1664,126 @@ REST framework supports all of these styles, and can apply them across forward o
 
 ----
 
+# March 24, 2022
+
+## ViewSets and Routers
+
+*Rest framework includes an abstraction for dealing with ViewSets, that allows the developers to concentrate on modeling the state and interactioins of the API, and leave the URL construction to be handled automatically, based on common conventions.*
+
+*A ViewSet class is only boind to a set of method handlers at the last moment, when it is instantiated into a set of views, typically by using a Router class which handles the complexities of defining the URL conf for us.*
+
+**Refactoring to use ViewSets**
+
+*First of all lets refactor our UserList and UserDetail views into a single UserViewSet. We can remove the two views, and replace them with a single class.*
+
+>```
+>from rest_framework import viewsets
+>
+>class UserViewSet(viewsets.ReadOnlyModelViewSet):
+>    """
+>    This viewset automatically provides `list` and `retrieve` actions.
+>    """
+>    queryset = User.objects.all()
+>    serializer_class = UserSerializer
+>```
+
+*Here, we have used the ReadOnlyModelViewSet class to automatically provide the default read-only operations.*
+
+*Next, we are going to replace the SnippetList, SnippetDetail and SnippetHighlight view classes, we can remove the three views, again replace them with a single class.*
+
+>```
+>from rest_framework.decorators import action
+>from rest_framework.response import Response
+>from rest_framework import permissions
+>
+>class SnippetViewSet(viewsets.ModelViewSet):
+>    """
+>    This viewset automatically provides `list`, `create`, `retrieve`,
+>    `update` and `destroy` actions.
+>
+>    Additionally we also provide an extra `highlight` action.
+>    """
+>    queryset = Snippet.objects.all()
+>    serializer_class = SnippetSerializer
+>    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+>                          IsOwnerOrReadOnly]
+>
+>    @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
+>    def highlight(self, request, *args, **kwargs):
+>        snippet = self.get_object()
+>        return Response(snippet.highlighted)
+>
+>    def perform_create(self, serializer):
+>        serializer.save(owner=self.request.user)
+>```
+
+*The time we have used the ModelViewSet class in order to get the complete set of default read and write operations.*
+
+**Binding ViewSets to URLs explicity**
+
+**In the snippets/urls.py flie we bind our viewset classes into a set of concrete views.**
+
+>```
+>from snippets.views import SnippetViewSet, UserViewSet, api_root
+>from rest_framework import renderers
+>
+>snippet_list = SnippetViewSet.as_view({
+>    'get': 'list',
+>    'post': 'create'
+>})
+>snippet_detail = SnippetViewSet.as_view({
+>    'get': 'retrieve',
+>    'put': 'update',
+>    'patch': 'partial_update',
+>    'delete': 'destroy'
+>})
+>snippet_highlight = SnippetViewSet.as_view({
+>    'get': 'highlight'
+>}, renderer_classes=[renderers.StaticHTMLRenderer])
+>user_list = UserViewSet.as_view({
+>    'get': 'list'
+>})
+>user_detail = UserViewSet.as_view({
+>    'get': 'retrieve'
+>})
+>```
+
+*Now that we have bound our resources into concrete views, we can register the views with the URL conf as usual.*
+
+>```
+>urlpatterns = format_suffix_patterns([
+>    path('', api_root),
+>    path('snippets/', snippet_list, name='snippet-list'),
+>    path('snippets/<int:pk>/', snippet_detail, name='snippet-detail'),
+>    path('snippets/<int:pk>/highlight/', snippet_highlight, name='snippet-highlight'),
+>    path('users/', user_list, name='user-list'),
+>    path('users/<int:pk>/', user_detail, name='user-detail')
+>])
+>```
+
+**Using Routers**
+
+*here, our re-wired snippets/urls.py file.*
+
+>```
+>from django.urls import path, include
+>from rest_framework.routers import DefaultRouter
+>from snippets import views
+>
+># Create a router and register our viewsets with it.
+>router = DefaultRouter()
+>router.register(r'snippets', views.SnippetViewSet,basename="snippets")
+>router.register(r'users', views.UserViewSet,basename="users")
+>
+># The API URLs are now determined automatically by the router.
+>urlpatterns = [
+>    path('', include(router.urls)),
+>]
+>```
+
+*Registering the viewsets with the router is similar to providing a urlpattern. We include two arguments; the  URL prefix for the views, and the viewset itself.*
+
+*The DefaultRouter class we are using also automatically creates the API root view for use, so we can now delete the api_root method from our views module.*
+
+---
+
