@@ -1787,3 +1787,41 @@ REST framework supports all of these styles, and can apply them across forward o
 
 ---
 
+---
+
+# 29 March 2022
+
+## Testing in Django
+
+*Testing is vital. Without properly testing our code, we will never know if the code works as it should, now or in the future when the codebase changes.*
+
+*Having tests in place will help ensure that if a specific function breaks we will know about it. Tests also make debugging breaks in code much easier, which saves time and money.*
+
+**Types of testing**
+
+**Unit test** are isolated tests that test one specific function.
+
+**Integration Tests** are larger tests that focus on user behavior and testing entire applications.
+
+### Coverage
+
+*Coverage is used for measuring the effectiveness of tests, shoring the percentage of our codebase covered by tests.*
+
+If you are just starting to set up unit tests, coverage can help offer suggestions on what should be tested. Coverage can also be used to turn testing into a game: I try to increase the percent of code covered by tests each day, for example.
+
+**Setup**
+
+Install coverage and add it to our INSTALLED_APPS
+
+>```
+>$ pip install coverage==3.6
+>```
+
+**Run coverage**
+
+>```
+>$ coverage run manage.py test whatever -v 2
+>```
+
+---
+
