@@ -1825,3 +1825,17 @@ Install coverage and add it to our INSTALLED_APPS
 
 ---
 
+---
+
+# 30 March 2022
+
+## Testing Views
+
+*Testing of views was added in portfolio.*
+
+---
+
+# 3 April, 2022
+
+*Request of portfolio was added in postman.*
+
