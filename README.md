@@ -1839,3 +1839,13 @@ Install coverage and add it to our INSTALLED_APPS
 
 *Request of portfolio was added in postman.*
 
+---
+
+# 4th April, 2022
+
+Testing was added for protfolio.
+
+---
+
+# 6th April, 2022
+
